@@ -28,7 +28,7 @@ export default function RootLayout({
             <body className={`${inter.className} antialiased`}>
                 <SolveCtxProvider>
                     <Navbar />
-                    <main className="min-h-screen bg-brand-bg pt-24 text-brand-text p-4">
+                    <main className="min-h-screen bg-brand-bg py-24 text-brand-text px-0 sm:p-5">
                         {children}
                     </main>
                 </SolveCtxProvider>

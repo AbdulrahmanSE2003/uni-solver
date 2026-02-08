@@ -2,6 +2,7 @@
 import CardsSection from "./_components/CardsSection";
 import Hero from "./_components/Hero";
 import Mockup from "./_components/Mockup";
+import StartSection from "./_components/StartSection";
 
 
 
@@ -21,6 +22,8 @@ export default function UniSolved() {
             {/* Cards Section */}
             <CardsSection />
 
+            {/* Start Section */}
+            <StartSection />
 
         </div>
     );

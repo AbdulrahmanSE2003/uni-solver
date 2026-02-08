@@ -20,8 +20,8 @@ function CardsSection() {
 
             {/* card */}
             <div className="card-wrapper grid md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-                {cards.map(card => (
-                    <div className="bg-white border border-zinc-300 rounded-[40px] p-8 py-10 space-y-6 hover:-translate-y-2 transition-all duration-500 shadow-xl shadow-brand-blue/15 hover:shadow-brand-blue/20">
+                {cards.map((card, i) => (
+                    <div key={i} className="bg-white border border-zinc-300 rounded-[40px] p-8 py-10 space-y-6 hover:-translate-y-2 transition-all duration-500 shadow-xl shadow-brand-blue/15 hover:shadow-brand-blue/20">
                         <div className="bg-brand-blue/15 rounded-full p-3 w-fit">
                             {card.icon}
                         </div>

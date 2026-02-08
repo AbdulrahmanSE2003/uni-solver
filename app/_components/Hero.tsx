@@ -1,5 +1,6 @@
 import { ArrowRight, BadgeCheckIcon } from "lucide-react";
-import Link from "next/link";
+import DynamicButton from "./DynamicButton";
+import Logo from "./Logo";
 
 
 const Hero = () => {
@@ -7,10 +8,7 @@ const Hero = () => {
         <section className="flex flex-col justify-start items-center p-5  space-y-8 max-w-5xl mx-auto">
 
             {/* Proof */}
-            <div className="bg-brand-blue/10 rounded-full py-2 px-5 border border-brand-blue/50 flex justify-center items-center gap-2">
-                <BadgeCheckIcon fill="#155dfc" stroke="#efefef" />
-                <span className="uppercase text-sm text-brand-blue font-bold">your trusted AI in your career </span>
-            </div>
+            <Logo />
 
 
 
@@ -29,11 +27,9 @@ const Hero = () => {
                 The ultimate companion for students. Generate, edit, and export academic work with human-like precision. Stay ahead of the curve with UniSolved.</p>
 
             {/* CTA */}
-
-            <Link href={'solve'} className="flex gap-2 items-center bg-brand-blue/95 cursor-pointer hover:bg-brand-blue transition-colors duration-500 shadow-lg shadow-brand-blue/50 text-brand-bg font-medium p-4 px-5 rounded-full group">
-                Get Started Free
+            <DynamicButton href="solve" text='Get Started Free' >
                 <ArrowRight className="group-hover:translate-x-2 transition-transform duration-500" />
-            </Link>
+            </DynamicButton>
         </section>
     )
 }
