@@ -1,5 +1,4 @@
 import React from 'react';
-import {AnimatePresence, motion} from "framer-motion";
 import {FileText, Loader2, Trash2, Upload} from "lucide-react";
 import {useSolve} from "@/app/_context/SolveCTX";
 

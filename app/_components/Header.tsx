@@ -1,5 +1,5 @@
 import React from 'react';
-import {Sparkles, Upload} from "lucide-react";
+import {Sparkles} from "lucide-react";
 import {motion} from  'framer-motion'
 
 function Header() {

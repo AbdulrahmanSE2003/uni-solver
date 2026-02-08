@@ -10,19 +10,28 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
         }
 
-        // تحويل الملف لـ Base64 عشان جمناي يفهمه (زي ما مكتوب في الدوك)
         const arrayBuffer = await file.arrayBuffer();
         const base64Data = Buffer.from(arrayBuffer).toString("base64");
 
-        // تهيئة جمناي
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-
-        // استخدم موديل gemini-1.5-flash (تأكد من الاسم ده)
+        // نصيحة: استخدم gemini-1.5-flash هي أسرع وأدق في قراءة الـ PDFs
         const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
-        const prompt = "You are an expert academic tutor. Please solve the questions in this document clearly and step-by-step.";
+        const prompt = `
+Act as a top-tier student. Solve the questions in the attached document following these rules:
 
-        // إرسال الملف مباشرة لجمناي
+1. **Cover Page Info**: At the very beginning, provide exactly these three lines:
+   Student Name: [Student Name]
+   Student ID: [Student ID]
+   Subject: [Extract Subject Name Here]
+
+2. **No Intro**: After those 3 lines, start with the first question immediately. Do not say "Here are the solutions" or "I have analyzed the document".
+3. **Style**: Concise, direct, and human-like. Use 1-2 sentences for explanations.
+4. **Formatting**: Use Markdown headings (###) for questions.
+
+Please analyze the attached PDF and solve it.
+`;
+
         const result = await model.generateContent([
             {
                 inlineData: {
@@ -41,7 +50,7 @@ export async function POST(req: NextRequest) {
     } catch (error: any) {
         console.error("❌ Gemini Error:", error);
         return NextResponse.json({
-            error: "AI failed to process the document. Check your API Key or Model name."
+            error: "Failed to process document. Check your API Key."
         }, { status: 500 });
     }
 }

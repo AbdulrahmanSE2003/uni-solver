@@ -27,6 +27,7 @@ const SolveCtxProvider = ({ children }: ContextProps) => {
         if (!file) return;
         setLoading(true);
         setSolution(null);
+        console.log(file)
 
         const formData = new FormData();
         formData.append("file", file);
