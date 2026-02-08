@@ -1,36 +1,47 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import PDFParser from "pdf2json";
 
 export async function POST(req: NextRequest) {
     try {
         const formData = await req.formData();
         const file = formData.get("file") as File;
-        if (!file) return NextResponse.json({ error: "No file!" }, { status: 400 });
 
-        const buffer = Buffer.from(await file.arrayBuffer());
+        if (!file) {
+            return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+        }
 
-        // تحويل الـ PDF لنص باستخدام وعد (Promise)
-        const extractedText = await new Promise<string>((resolve, reject) => {
-            const pdfParser = new PDFParser(null, 1); // 1 يعني extract text only
-            pdfParser.on("pdfParser_dataError", (errData) => reject(errData.parserError));
-            pdfParser.on("pdfParser_dataReady", () => {
-                // @ts-ignore
-                resolve(pdfParser.getRawTextContent());
-            });
-            pdfParser.parseBuffer(buffer);
-        });
+        // تحويل الملف لـ Base64 عشان جمناي يفهمه (زي ما مكتوب في الدوك)
+        const arrayBuffer = await file.arrayBuffer();
+        const base64Data = Buffer.from(arrayBuffer).toString("base64");
 
-        // ربط Gemini
+        // تهيئة جمناي
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-        const prompt = `You are a professional tutor. Solve these questions clearly:\n${extractedText}`;
-        const result = await model.generateContent(prompt);
+        // استخدم موديل gemini-1.5-flash (تأكد من الاسم ده)
+        const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
-        return NextResponse.json({ solution: result.response.text() });
+        const prompt = "You are an expert academic tutor. Please solve the questions in this document clearly and step-by-step.";
+
+        // إرسال الملف مباشرة لجمناي
+        const result = await model.generateContent([
+            {
+                inlineData: {
+                    data: base64Data,
+                    mimeType: "application/pdf"
+                }
+            },
+            { text: prompt },
+        ]);
+
+        const response = await result.response;
+        const text = response.text();
+
+        return NextResponse.json({ solution: text });
+
     } catch (error: any) {
-        console.error("Error:", error);
-        return NextResponse.json({ error: "Failed to read PDF or call AI" }, { status: 500 });
+        console.error("❌ Gemini Error:", error);
+        return NextResponse.json({
+            error: "AI failed to process the document. Check your API Key or Model name."
+        }, { status: 500 });
     }
 }
