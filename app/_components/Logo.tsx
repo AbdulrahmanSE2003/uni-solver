@@ -1,10 +1,13 @@
-import { BadgeCheckIcon } from 'lucide-react'
+import { Sparkles } from "lucide-react"
+
 
 function Logo() {
     return (
-        <div className="bg-brand-blue/10 rounded-full py-2 px-5 border border-brand-blue/50 flex justify-center items-center gap-2">
-            <BadgeCheckIcon fill="#155dfc" stroke="#efefef" />
-            <span className="uppercase text-sm text-brand-blue font-bold">your trusted AI in your career </span>
+        <div className='flex justify-center items-center gap-2'>
+            <div className='bg-brand-blue rounded-lg shadow-lg p-2'>
+                <Sparkles className="text-white w-5 h-5" />
+            </div>
+            <span className='font-bold text-base tracking-tight text-brand-text'>UniSolver</span>
         </div>
     )
 }
