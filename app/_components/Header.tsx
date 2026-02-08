@@ -1,6 +1,6 @@
 import React from 'react';
-import {Sparkles} from "lucide-react";
-import {motion} from  'framer-motion'
+import { Sparkles } from "lucide-react";
+import { motion } from 'framer-motion'
 
 function Header() {
     return (
@@ -13,7 +13,7 @@ function Header() {
                 <Sparkles className="text-white w-8 h-8" />
             </motion.div>
             <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
-                Uni<span className="text-blue-600">Solved</span>
+                Uni<span className="text-blue-600">Solver</span>
             </h1>
             <p className="text-slate-500 mt-2 text-lg">Upload your PDF and let AI handle the rest.</p>
         </header>

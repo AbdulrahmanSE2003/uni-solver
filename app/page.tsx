@@ -1,31 +1,27 @@
-'use client'
 
-import { AnimatePresence } from "framer-motion";
-import Header from "@/app/_components/Header";
-import Uploader from "@/app/_components/Uploader";
-import Result from "@/app/_components/Result";
-import {useSolve} from "@/app/_context/SolveCTX";
+import CardsSection from "./_components/CardsSection";
+import Hero from "./_components/Hero";
+import Mockup from "./_components/Mockup";
+
+
+
 
 export default function UniSolved() {
-    const {solution} = useSolve()
+
 
     return (
-        <main className="min-h-screen bg-[#f8fafc] text-slate-900 p-4 md:p-8">
-            <div className="max-w-4xl mx-auto">
+        <div>
+            {/* Hero Section */}
+            <Hero />
 
-                {/* Header */}
-                <Header/>
+            {/* Mockup Section */}
+            <Mockup />
 
-                {/* Upload Section */}
-                <Uploader/>
 
-                {/* Results Section */}
-                <AnimatePresence>
-                    {solution && (
-                        <Result sol={solution}/>
-                    )}
-                </AnimatePresence>
-            </div>
-        </main>
+            {/* Cards Section */}
+            <CardsSection />
+
+
+        </div>
     );
 }
