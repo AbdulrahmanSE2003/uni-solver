@@ -3,6 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import AuthSection from "./AuthSection";
+import { ReactNode } from "react";
 
 const links = [
     { label: 'home', to: '/' },
@@ -10,7 +12,12 @@ const links = [
     { label: 'settings', to: '/settings' },
 ]
 
-const Navbar = () => {
+
+type navbarProps = {
+    children: ReactNode;
+}
+
+const Navbar = ({ children }: navbarProps) => {
     const pathname = usePathname();
 
     return (
@@ -48,6 +55,10 @@ const Navbar = () => {
                     );
                 })}
             </ul>
+
+            <div>
+                {children}
+            </div>
         </motion.nav>
     );
 };

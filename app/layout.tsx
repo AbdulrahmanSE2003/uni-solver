@@ -4,6 +4,7 @@ import "./globals.css";
 import SolveCtxProvider from "@/app/_context/SolveCTX";
 import Navbar from "@/app/_components/Navbar";
 import Footer from "./_components/Footer";
+import AuthSection from "./_components/AuthSection";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -28,7 +29,9 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${inter.className} antialiased`}>
                 <SolveCtxProvider>
-                    <Navbar />
+                    <Navbar >
+                        <AuthSection />
+                    </Navbar>
                     <main className="min-h-screen bg-brand-bg py-24 text-brand-text px-0 max-sm:p-5">
                         {children}
                     </main>

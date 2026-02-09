@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 interface DynamicButtonProps {
     children?: ReactNode;
-    text: string;
+    text?: string;
     href?: string;
     onClick?: () => void;
     className?: string;
