@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { toast } from "sonner";
 
 export async function POST(req: NextRequest) {
     try {
@@ -10,19 +11,21 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
         }
 
+        const studentName = formData.get("studentName") as string || "N/A";
+        const studentId = formData.get("studentId") as string || "N/A";
+
         const arrayBuffer = await file.arrayBuffer();
         const base64Data = Buffer.from(arrayBuffer).toString("base64");
 
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-        // نصيحة: استخدم gemini-1.5-flash هي أسرع وأدق في قراءة الـ PDFs
         const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
         const prompt = `
 Act as a top-tier student. Solve the questions in the attached document following these rules:
 
 1. **Cover Page Info**: At the very beginning, provide exactly these three lines:
-   Student Name: [Student Name]
-   Student ID: [Student ID]
+   Student Name: ${studentName}
+   Student ID: ${studentId}
    Subject: [Extract Subject Name Here]
 
 2. **No Intro**: After those 3 lines, start with the first question immediately. Do not say "Here are the solutions" or "I have analyzed the document".
@@ -49,8 +52,6 @@ Please analyze the attached PDF and solve it.
 
     } catch (error: any) {
         console.error("❌ Gemini Error:", error);
-        return NextResponse.json({
-            error: "Failed to process document. Check your API Key."
-        }, { status: 500 });
+        toast.error('The AI engine is currently experiencing high traffic. Please wait a moment and try again.')
     }
 }

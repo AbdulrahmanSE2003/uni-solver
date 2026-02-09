@@ -1,29 +1,21 @@
-'use client'
-
-import { AnimatePresence } from "framer-motion";
 import Header from "@/app/_components/Header";
-import Uploader from "@/app/_components/Uploader";
 import Result from "@/app/_components/Result";
-import {useSolve} from "@/app/_context/SolveCTX";
+import { auth } from "@/auth";
+import { SolveData } from "../_components/SolveData";
 
-const Page = () => {
-    const {solution} = useSolve()
+const Page = async () => {
+
+    const session = await auth();
+    const userName = session?.user?.name || ""
+
+
     return (
+        <div className="max-w-4xl mx-auto p-6 space-y-10">
+            <Header />
 
-        <div className="max-w-4xl mx-auto">
+            <SolveData name={userName} />
 
-            {/* Header */}
-            <Header/>
-
-            {/* Upload Section */}
-            <Uploader/>
-
-            {/* Results Section */}
-            <AnimatePresence>
-                {solution && (
-                    <Result sol={solution}/>
-                )}
-            </AnimatePresence>
+            <Result />
         </div>
     );
 };

@@ -10,7 +10,6 @@ import AuthSection from "./_components/AuthSection";
 
 
 export default async function UniSolved() {
-    const session = await auth();
 
 
     return (

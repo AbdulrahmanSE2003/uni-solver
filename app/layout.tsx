@@ -1,3 +1,5 @@
+import { Toaster } from "@/components/ui/sonner"
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -32,6 +34,7 @@ export default function RootLayout({
                     <Navbar >
                         <AuthSection />
                     </Navbar>
+                    <Toaster />
                     <main className="min-h-screen bg-brand-bg py-24 text-brand-text px-0 max-sm:p-5">
                         {children}
                     </main>

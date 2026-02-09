@@ -1,24 +1,20 @@
 "use client";
 
-import React from 'react';
-import { Download, Sparkles, ExternalLink } from "lucide-react";
+import { Download, Sparkles, ExternalLink, FileText, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import { saveAs } from "file-saver";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { useSolve } from "../_context/SolveCTX";
+import { toast } from "sonner";
 
-type resultProps = {
-    sol: string | null
-}
 
-const Result = ({ sol }: resultProps) => {
+const Result = () => {
+    const { solution } = useSolve()
 
     const downloadDocx = async () => {
-        if (!sol) return;
+        if (!solution) return;
 
-        // تنظيف أي رغي AI لو فلت من البرومبت
-        const lines = sol.split('\n').filter(line =>
+        const lines = solution.split('\n').filter(line =>
             !line.toLowerCase().includes("as an academic tutor") &&
             !line.toLowerCase().includes("here are the solutions")
         );
@@ -28,7 +24,7 @@ const Result = ({ sol }: resultProps) => {
                 children: lines.map(line => {
                     const isHeading = line.startsWith('#');
                     const cleanLine = line.replace(/[#*]/g, '').trim();
-                    if (!cleanLine) return new Paragraph({ text: "" }); // سطر فاضي للمسافات
+                    if (!cleanLine) return new Paragraph({ text: "" });
 
                     return new Paragraph({
                         children: [
@@ -46,50 +42,59 @@ const Result = ({ sol }: resultProps) => {
         });
 
         const blob = await Packer.toBlob(doc);
-        saveAs(blob, "Assignment_Solution.docx");
+        saveAs(blob, "UniSolver_Solution.docx");
     };
 
-    if (!sol) return null;
+    if (!solution) return null;
 
     return (
         <motion.section
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-8 bg-white rounded-3xl shadow-xl border border-slate-100 p-8 md:p-10"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mt-6 bg-slate-900 rounded-3xl shadow-2xl p-6 border border-slate-800 text-white"
         >
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 border-b border-slate-100 pb-6">
-                <div className="flex items-center gap-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                        <Sparkles className="text-green-600 w-5 h-5" />
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                {/* Status Info */}
+                <div className="flex items-center gap-4">
+                    <div className="p-3 bg-green-500/20 rounded-2xl border border-green-500/30">
+                        <CheckCircle2 className="text-green-400 w-6 h-6" />
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-900">Final Solution</h2>
+                    <div>
+                        <h2 className="text-lg font-bold">Solution Generated!</h2>
+                        <p className="text-slate-400 text-sm">Your file is ready to be exported.</p>
+                    </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3">
-                    {/* زرار جوجل دوكس */}
+                {/* Actions Group */}
+                <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                    {/* Google Docs */}
                     <button
                         onClick={() => window.open('https://docs.google.com/document/u/0/?showSpecs=true', '_blank')}
-                        className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-5 py-2.5 rounded-xl hover:bg-slate-50 transition-all font-medium border border-slate-200 shadow-sm text-sm"
+                        className="flex-1 md:flex-none cursor-pointer inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 px-5 py-3 rounded-2xl transition-all font-medium border border-slate-700 text-sm"
                     >
-                        <ExternalLink className="w-4 h-4 text-blue-500" />
-                        Open Google Docs
+                        <ExternalLink className="w-4 h-4 text-blue-400" />
+                        Google Docs
                     </button>
 
-                    {/* زرار التحميل */}
+                    {/* DOCX Download */}
                     <button
                         onClick={downloadDocx}
-                        className="inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-xl hover:bg-blue-700 transition-all font-medium shadow-md shadow-blue-100 text-sm"
+                        className="flex-1 md:flex-none cursor-pointer inline-flex items-center justify-center gap-2 bg-brand-blue text-white px-6 py-3 rounded-2xl hover:bg-blue-600 transition-all font-medium shadow-lg shadow-blue-900/20 text-sm"
                     >
-                        <Download className="w-4 h-4" />
+                        <FileText className="w-4 h-4" />
                         Download DOCX
                     </button>
                 </div>
             </div>
 
-            <div className="prose prose-blue max-w-none text-slate-700 font-medium">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {sol}
-                </ReactMarkdown>
+            {/* نوت بسيطة لو عايز يتأكد من حاجة */}
+            <div className="mt-4 pt-4 border-t border-slate-800 flex justify-center">
+                <button
+                    onClick={() => toast.warning("Preview functionality coming soon!")}
+                    className="text-xs text-slate-500 cursor-pointer hover:text-slate-300 transition-colors underline underline-offset-4"
+                >
+                    Show Quick Preview
+                </button>
             </div>
         </motion.section>
     );

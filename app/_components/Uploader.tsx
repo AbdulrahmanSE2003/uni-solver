@@ -1,10 +1,30 @@
-import React from 'react';
-import {FileText, Loader2, Trash2, Upload} from "lucide-react";
-import {useSolve} from "@/app/_context/SolveCTX";
+import { useState, useEffect } from 'react';
+import { FileText, Loader2, Trash2, Upload } from "lucide-react";
+import { useSolve } from "@/app/_context/SolveCTX";
+
+const loadingSteps = [
+    "Uploading your assignment...",
+    "Scanning document structure...",
+    "Analyzing questions with AI...",
+    "Thinking like a top-tier student...",
+    "Formatting the final solution...",
+    "Almost there, just a few more seconds..."
+];
 
 function Uploader() {
-    const {file, setFile, handleSolve, setSolution, loading, solution} = useSolve();
+    const { file, setFile, handleSolve, setSolution, loading, solution } = useSolve();
+    const [stepIndex, setStepIndex] = useState(0);
 
+    useEffect(() => {
+        let interval: NodeJS.Timeout;
+        if (loading) {
+            setStepIndex(0);
+            interval = setInterval(() => {
+                setStepIndex((prev) => (prev < loadingSteps.length - 1 ? prev + 1 : prev));
+            }, 3500);
+        }
+        return () => clearInterval(interval);
+    }, [loading]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -14,7 +34,7 @@ function Uploader() {
     };
 
     return (
-        <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+        <section className="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
             <div className="p-8 md:p-12">
                 {!file ? (
                     <label className="group relative flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-slate-300 rounded-2xl cursor-pointer hover:border-blue-500 hover:bg-blue-50/50 transition-all">
@@ -33,7 +53,7 @@ function Uploader() {
                                 <p className="font-medium text-slate-900 truncate">{file.name}</p>
                                 <p className="text-sm text-slate-500">{(file.size / 1024).toFixed(1)} KB</p>
                             </div>
-                            <button onClick={() => setFile(null)} className="p-2 hover:bg-red-50 text-red-500 rounded-lg transition-colors">
+                            <button onClick={() => setFile(null)} className="p-2 cursor-pointer hover:bg-red-50 text-red-500 rounded-lg transition-colors">
                                 <Trash2 className="w-5 h-5" />
                             </button>
                         </div>
@@ -49,16 +69,22 @@ function Uploader() {
                     </div>
                 )}
 
-                {/* Loading State */}
+                {/* Loading State الجديد */}
                 {loading && (
-                    <div className="flex flex-col items-center mt-8">
-                        <Loader2 className="w-10 h-10 text-blue-600 animate-spin mb-4" />
-                        <p className="text-slate-600 animate-pulse font-medium">Analyzing your assignment...</p>
+                    <div className="flex flex-col items-center mt-8 space-y-4">
+                        <div className="relative flex items-center justify-center">
+                            <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+                            <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-20"></div>
+                        </div>
+                        <div className="text-center">
+                            <p className="text-slate-800 font-bold text-lg animate-pulse transition-all duration-500">
+                                {loadingSteps[stepIndex]}
+                            </p>
+                        </div>
                     </div>
                 )}
             </div>
         </section>
-
     );
 }
 
