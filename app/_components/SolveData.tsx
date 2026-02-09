@@ -11,6 +11,7 @@ type solveDataProps = {
 
 export const SolveData = ({ name = '' }: solveDataProps) => {
     const { student, setStudent, id, setId, handleSolve } = useSolve()
+    setStudent(name)
     return (
         <section className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 space-y-6">
             {/* Inputs Row */}
@@ -21,7 +22,7 @@ export const SolveData = ({ name = '' }: solveDataProps) => {
                     <input
                         type="text"
                         placeholder="Ahmed Ali"
-                        value={name || student}
+                        value={student}
                         onChange={(e) => setStudent(e.target.value)}
                         className="w-full p-4 bg-slate-100 border border-brand-blue/30 rounded-2xl focus:ring-1 focus:ring-brand-blue outline-none transition-all"
                     />

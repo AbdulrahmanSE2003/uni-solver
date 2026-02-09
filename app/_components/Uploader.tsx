@@ -69,7 +69,7 @@ function Uploader() {
                     </div>
                 )}
 
-                {/* Loading State الجديد */}
+
                 {loading && (
                     <div className="flex flex-col items-center mt-8 space-y-4">
                         <div className="relative flex items-center justify-center">
@@ -77,7 +77,7 @@ function Uploader() {
                             <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-20"></div>
                         </div>
                         <div className="text-center">
-                            <p className="text-slate-800 font-bold text-lg animate-pulse transition-all duration-500">
+                            <p className="text-slate-800 font-bold text-lg animate-pulse transition-all duration-700">
                                 {loadingSteps[stepIndex]}
                             </p>
                         </div>

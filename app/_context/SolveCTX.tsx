@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, ReactNode, useContext, useState } from "react";
+import { toast } from "sonner";
 
 interface UniSolvedContextType {
     file: File | null;
@@ -55,7 +56,7 @@ const SolveCtxProvider = ({ children }: ContextProps) => {
             }
         } catch (error) {
             console.error("Upload error:", error);
-            alert("Failed to connect to the server.");
+            toast.error("Failed to connect to the server.");
         } finally {
             setLoading(false);
         }
