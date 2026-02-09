@@ -34,7 +34,7 @@ export default function RootLayout({
                     <Navbar >
                         <AuthSection />
                     </Navbar>
-                    <Toaster />
+                    <Toaster richColors />
                     <main className="min-h-screen bg-brand-bg py-24 text-brand-text px-0 max-sm:p-5">
                         {children}
                     </main>

@@ -14,6 +14,10 @@ export async function POST(req: NextRequest) {
         const studentName = formData.get("studentName") as string || "N/A";
         const studentId = formData.get("studentId") as string || "N/A";
 
+
+        console.log(studentName);
+
+
         const arrayBuffer = await file.arrayBuffer();
         const base64Data = Buffer.from(arrayBuffer).toString("base64");
 
