@@ -13,18 +13,31 @@ const inter = Inter({
   display: "swap",
 });
 
+// All comments and code are in English as requested
 export const metadata: Metadata = {
-  title: "UniSolver | Your AI Academic Assistant",
+  title: "UniSolver | AI Academic Assignment Solver & PDF Assistant",
   description:
-    "Upload your university assignments and get instant, accurate solutions powered by Google Gemini AI. Solving PDFs has never been easier.",
+    "Solve university assignments instantly with UniSolver. Upload PDFs and get accurate solutions powered by Google Gemini AI. The ultimate academic helper.",
   keywords: [
     "AI Assignment Solver",
-    "Gemini AI",
-    "University Help",
-    "PDF Solver",
+    "Google Gemini AI",
+    "University Homework Help",
+    "PDF Solution Generator",
+    "Academic AI Assistant",
+    "Online Study Tool",
   ],
+  authors: [{ name: "Abdulrahman" }],
+  openGraph: {
+    title: "UniSolver | Your AI Academic Assistant",
+    description: "Instant solutions for your university assignments using AI.",
+    url: "https://uni-solver.vercel.app/", // Replace with your actual domain
+    siteName: "UniSolver",
+    locale: "en_US",
+    type: "website",
+  },
   icons: {
     icon: "/icon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 
