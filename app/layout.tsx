@@ -1,4 +1,4 @@
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/sonner";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -9,38 +9,44 @@ import Footer from "./_components/Footer";
 import AuthSection from "./_components/AuthSection";
 
 const inter = Inter({
-    subsets: ["latin"],
-    display: 'swap',
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-    title: "UniSolved | Your AI Academic Assistant",
-    description: "Upload your university assignments and get instant, accurate solutions powered by Google Gemini AI. Solving PDFs has never been easier.",
-    keywords: ["AI Assignment Solver", "Gemini AI", "University Help", "PDF Solver"],
-    icons: {
-        icon: "/icon.svg",
-    },
+  title: "UniSolver | Your AI Academic Assistant",
+  description:
+    "Upload your university assignments and get instant, accurate solutions powered by Google Gemini AI. Solving PDFs has never been easier.",
+  keywords: [
+    "AI Assignment Solver",
+    "Gemini AI",
+    "University Help",
+    "PDF Solver",
+  ],
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body className={`${inter.className} antialiased`}>
-                <SolveCtxProvider>
-                    <Navbar >
-                        <AuthSection />
-                    </Navbar>
-                    <Toaster richColors />
-                    <main className="min-h-screen bg-brand-bg py-24 text-brand-text px-0 max-sm:p-5">
-                        {children}
-                    </main>
-                    <Footer />
-                </SolveCtxProvider>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>
+        <SolveCtxProvider>
+          <Navbar>
+            <AuthSection />
+          </Navbar>
+          <Toaster richColors />
+          <main className="min-h-screen bg-brand-bg py-24 text-brand-text px-0 max-sm:p-5">
+            {children}
+          </main>
+          <Footer />
+        </SolveCtxProvider>
+      </body>
+    </html>
+  );
 }
