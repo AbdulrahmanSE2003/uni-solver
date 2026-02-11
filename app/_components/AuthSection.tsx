@@ -3,8 +3,6 @@ import DynamicButton from "./DynamicButton";
 import { LogIn } from "lucide-react";
 import Image from "next/image";
 
-import avatar from "@/public/avatar.png";
-
 export default async function AuthSection() {
   const session = await auth();
 
@@ -30,7 +28,7 @@ export default async function AuthSection() {
   return (
     <div className="flex items-center gap-3">
       <Image
-        src={session.user?.image || avatar}
+        src={session.user?.image || ""}
         alt="Profile"
         className="w-8 h-8 rounded-full border border-brand-blue"
       />
