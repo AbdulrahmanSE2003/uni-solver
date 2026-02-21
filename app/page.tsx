@@ -1,7 +1,7 @@
 import CardsSection from "./_components/HomePage/CardsSection";
 import Hero from "./_components/HomePage/Hero";
 import Mockup from "./_components/HomePage/Mockup";
-import StartSection from "./_components/StartSection";
+import StartSection from "./_components/HomePage/StartSection";
 
 export default async function UniSolved() {
   return (

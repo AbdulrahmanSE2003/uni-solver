@@ -1,27 +1,41 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { toast } from "sonner";
+import { auth } from "@/auth";
 
 export async function POST(req: NextRequest) {
-    try {
-        const formData = await req.formData();
-        const file = formData.get("file") as File;
+  const session = await auth();
+  const isOwner = session?.user?.email === "abdulrahman.saad2303@gmail.com";
 
-        if (!file) {
-            return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
-        }
+  // }
+  try {
+    const formData = await req.formData();
+    const file = formData.get("file") as File;
+    const userKey = formData.get("userApiKey");
 
-        const studentName = formData.get("studentName") as string || "N/A";
-        const studentId = formData.get("studentId") as string || "N/A";
+    const FINAL_KEY = userKey || (isOwner ? process.env.GEMINI_API_KEY : null);
 
+    if (!FINAL_KEY) {
+      return NextResponse.json(
+        { error: "API Key is required. Please add it in settings." },
+        { status: 401 },
+      );
+    }
 
-        const arrayBuffer = await file.arrayBuffer();
-        const base64Data = Buffer.from(arrayBuffer).toString("base64");
+    if (!file) {
+      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+    }
 
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
-        const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+    const studentName = (formData.get("studentName") as string) || "N/A";
+    const studentId = (formData.get("studentId") as string) || "N/A";
 
-        const prompt = `
+    const arrayBuffer = await file.arrayBuffer();
+    const base64Data = Buffer.from(arrayBuffer).toString("base64");
+
+    const genAI = new GoogleGenerativeAI(String(userKey));
+    const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
+
+    const prompt = `
 Act as a top-tier student. Solve the questions in the attached document following these rules:
 
 1. **Cover Page Info**: At the very beginning, provide exactly these three lines:
@@ -36,23 +50,24 @@ Act as a top-tier student. Solve the questions in the attached document followin
 Please analyze the attached PDF and solve it.
 `;
 
-        const result = await model.generateContent([
-            {
-                inlineData: {
-                    data: base64Data,
-                    mimeType: "application/pdf"
-                }
-            },
-            { text: prompt },
-        ]);
+    const result = await model.generateContent([
+      {
+        inlineData: {
+          data: base64Data,
+          mimeType: "application/pdf",
+        },
+      },
+      { text: prompt },
+    ]);
 
-        const response = await result.response;
-        const text = response.text();
+    const response = await result.response;
+    const text = response.text();
 
-        return NextResponse.json({ solution: text });
-
-    } catch (error: any) {
-        console.error("❌ Gemini Error:", error);
-        toast.error('The AI engine is currently experiencing high traffic. Please wait a moment and try again.')
-    }
+    return NextResponse.json({ solution: text });
+  } catch (error) {
+    console.error("❌ Gemini Error:", error);
+    toast.error(
+      "The AI engine is currently experiencing high traffic. Please wait a moment and try again.",
+    );
+  }
 }

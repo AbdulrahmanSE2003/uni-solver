@@ -1,69 +1,71 @@
-'use client'
+"use client";
 
 import { createContext, ReactNode, useContext, useState } from "react";
 import { toast } from "sonner";
 
 interface UniSolvedContextType {
-    file: File | null;
-    setFile: (file: File | null) => void;
-    loading: boolean;
-    student: string;
-    setStudent: (student: string) => void;
-    id: string;
-    setId: (id: string) => void;
-    solution: string | null;
-    setSolution: (solution: string | null) => void;
-    handleSolve: () => void;
+  file: File | null;
+  setFile: (file: File | null) => void;
+  loading: boolean;
+  student: string;
+  setStudent: (student: string) => void;
+  id: string;
+  setId: (id: string) => void;
+  solution: string | null;
+  setSolution: (solution: string | null) => void;
+  handleSolve: () => void;
+  API_KEY: string;
+  setAPI_KEY: (key: string) => void;
 }
 
-export const SolveCTX = createContext<UniSolvedContextType | null>(null)
+export const SolveCTX = createContext<UniSolvedContextType | null>(null);
 
 type ContextProps = {
-    children: ReactNode;
-}
-
+  children: ReactNode;
+};
 
 const SolveCtxProvider = ({ children }: ContextProps) => {
-    const [file, setFile] = useState<File | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [solution, setSolution] = useState<string | null>(null);
-    const [student, setStudent] = useState('')
-    const [id, setId] = useState('')
+  const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [solution, setSolution] = useState<string | null>(null);
+  const [student, setStudent] = useState("");
+  const [id, setId] = useState("");
+  const [API_KEY, setAPI_KEY] = useState("");
 
+  const handleSolve = async () => {
+    if (!file) return;
+    setLoading(true);
+    setSolution(null);
 
-    const handleSolve = async () => {
-        if (!file) return;
-        setLoading(true);
-        setSolution(null);
-        console.log(file)
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("studentName", String(student));
+    formData.append("studentId", String(id));
+    formData.append("userApiKey", API_KEY);
 
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("studentName", String(student));
-        formData.append("studentId", String(id));
+    try {
+      const res = await fetch("/api/solve", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
 
-        try {
-            const res = await fetch("/api/solve", {
-                method: "POST",
-                body: formData,
-            });
-            const data = await res.json();
+      if (data.solution) {
+        setSolution(data.solution);
+      } else {
+        alert(data.error || "Something went wrong!");
+      }
+    } catch (error) {
+      console.error("Upload error:", error);
+      toast.error("Failed to connect to the server.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            if (data.solution) {
-                setSolution(data.solution);
-            } else {
-                alert(data.error || "Something went wrong!");
-            }
-        } catch (error) {
-            console.error("Upload error:", error);
-            toast.error("Failed to connect to the server.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-
-    return (<SolveCTX.Provider value={{
+  return (
+    <SolveCTX.Provider
+      value={{
         handleSolve,
         file,
         setFile,
@@ -74,13 +76,20 @@ const SolveCtxProvider = ({ children }: ContextProps) => {
         setStudent,
         id,
         setId,
-    }}>{children}</SolveCTX.Provider>)
+        API_KEY,
+        setAPI_KEY,
+      }}
+    >
+      {children}
+    </SolveCTX.Provider>
+  );
 };
 
 export const useSolve = () => {
-    const context = useContext(SolveCTX);
-    if (!context) throw new Error("useSolve must be used within a SolveCtxProvider");
-    return context;
+  const context = useContext(SolveCTX);
+  if (!context)
+    throw new Error("useSolve must be used within a SolveCtxProvider");
+  return context;
 };
 
 export default SolveCtxProvider;

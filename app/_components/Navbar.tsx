@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { Sparkles, Menu, X } from "lucide-react"; // ضيفنا Menu و X
+import { motion, AnimatePresence } from "framer-motion";
+import { ReactNode, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
@@ -12,57 +12,96 @@ const links = [
   { label: "settings", to: "/settings" },
 ];
 
-type navbarProps = {
-  children: ReactNode;
-};
-
-const Navbar = ({ children }: navbarProps) => {
+const Navbar = ({ children }: { children?: ReactNode }) => {
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false); // حالة القائمة في الموبايل
 
   return (
-    <motion.nav
-      initial={{ y: -100, x: "-50%", opacity: 0 }}
-      animate={{ y: 0, x: "-50%", opacity: 1 }}
-      transition={{ duration: 0.4, ease: "circOut" }}
-      className="fixed top-6 left-1/2 h-14 min-w-100 bg-brand-bg backdrop-blur-md border border-white dark:border-zinc-700 shadow-2xl shadow-brand-blue/10 text-brand-text rounded-full p-2 px-6 flex justify-between items-center gap-8 z-50"
-    >
-      {/* Logo */}
-      <div className="flex justify-center items-center gap-2">
-        <div className="bg-brand-blue rounded-lg shadow-lg p-2">
-          <Sparkles className="text-white w-5 h-5" />
+    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl">
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="relative bg-brand-bg/80 backdrop-blur-xl border border-white/20 dark:border-zinc-800 shadow-2xl rounded-full p-2 px-4 md:px-6 flex justify-between items-center gap-2"
+      >
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <div className="bg-brand-blue rounded-full p-2 shadow-blue-500/20 shadow-lg">
+            <Sparkles className="text-white w-4 h-4 md:w-5 md:h-5" />
+          </div>
+          <span className="font-bold text-sm md:text-base tracking-tighter hidden sm:block">
+            UniSolver
+          </span>
+        </Link>
+
+        {/* Desktop Links (Hidden on Mobile) */}
+        <ul className="hidden md:flex items-center gap-1 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 rounded-full border border-zinc-200/50 dark:border-zinc-800">
+          {links.map((link) => {
+            const isActive = pathname === link.to;
+            return (
+              <li key={link.to}>
+                <Link
+                  href={link.to}
+                  className={`px-4 py-1.5 rounded-full text-xs lg:text-sm capitalize transition-all relative ${
+                    isActive
+                      ? "text-brand-blue font-bold"
+                      : "text-slate-500 hover:text-brand-text"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeTab"
+                      className="absolute inset-0 bg-white dark:bg-zinc-800 rounded-full shadow-sm -z-10"
+                    />
+                  )}
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* Actions (Theme & Mobile Toggle) */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          {children}
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-        <span className="font-bold text-sm tracking-tight text-brand-text">
-          UniSolver
-        </span>
-      </div>
+      </motion.nav>
 
-      {/* Links */}
-      <ul className="flex justify-center items-center grow font-medium gap-1">
-        {links.map((link, i) => {
-          const isActive = pathname === link.to;
-
-          return (
-            <li key={i}>
+      {/* Mobile Dropdown Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            className="absolute top-16 left-0 right-0 bg-brand-bg/95 backdrop-blur-2xl border border-white/20 dark:border-zinc-800 rounded-3xl p-4 shadow-3xl md:hidden flex flex-col gap-2"
+          >
+            {links.map((link) => (
               <Link
+                key={link.to}
                 href={link.to}
-                className={`relative px-4 py-1.5 rounded-full text-sm capitalize transition-all duration-300 ${
-                  isActive
-                    ? "text-brand-blue font-bold"
-                    : "text-slate-500 hover:text-brand-blue opacity-80 hover:opacity-100"
+                onClick={() => setIsOpen(false)}
+                className={`p-4 rounded-2xl text-center capitalize font-medium ${
+                  pathname === link.to
+                    ? "bg-brand-blue text-white"
+                    : "hover:bg-zinc-100 dark:hover:bg-zinc-900"
                 }`}
               >
                 {link.label}
               </Link>
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* Theme Toggle */}
-      <ThemeToggle />
-
-      <div>{children}</div>
-    </motion.nav>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   );
 };
 

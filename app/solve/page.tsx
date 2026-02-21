@@ -1,5 +1,5 @@
 import Header from "@/app/_components/Header";
-import Result from "@/app/_components/Result";
+import Result from "@/app/_components/solvePage/Result";
 import { auth } from "@/auth";
 import { SolveData } from "../_components/solvePage/SolveData";
 

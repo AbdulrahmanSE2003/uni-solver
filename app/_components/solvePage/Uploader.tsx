@@ -60,10 +60,10 @@ function Uploader() {
           </label>
         ) : (
           <div className="flex flex-col items-center">
-            <div className="flex items-center gap-4 p-4 bg-slate-50 rounded-xl w-full border border-slate-200">
+            <div className="flex items-center gap-4 p-4 bg-brand-bg rounded-xl w-full border border-zinc-300 dark:border-zinc-800">
               <FileText className="text-blue-600 w-8 h-8" />
               <div className="flex-1 overflow-hidden">
-                <p className="font-medium text-slate-900 truncate">
+                <p className="font-medium text-brand-text truncate">
                   {file.name}
                 </p>
                 <p className="text-sm text-slate-500">
@@ -72,7 +72,7 @@ function Uploader() {
               </div>
               <button
                 onClick={() => setFile(null)}
-                className="p-2 cursor-pointer hover:bg-red-50 text-red-500 rounded-lg transition-colors"
+                className="p-2 cursor-pointer hover:bg-red-50 dark:hover:bg-red-50/10 text-red-500 rounded-lg transition-colors"
               >
                 <Trash2 className="w-5 h-5" />
               </button>
@@ -81,7 +81,7 @@ function Uploader() {
             {!loading && !solution && (
               <button
                 onClick={handleSolve}
-                className="mt-8 w-full md:w-auto px-12 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 transition-all active:scale-95"
+                className="mt-8 w-full md:w-auto px-12 py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-200 dark:shadow-blue-200/10 cursor-pointer transition-all active:scale-95"
               >
                 Generate Solution
               </button>

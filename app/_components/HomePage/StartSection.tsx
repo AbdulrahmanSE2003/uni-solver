@@ -1,4 +1,4 @@
-import DynamicButton from "./DynamicButton";
+import DynamicButton from "../DynamicButton";
 
 export default function StartSection() {
   return (

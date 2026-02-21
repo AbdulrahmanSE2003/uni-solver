@@ -8,7 +8,10 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setMounted(true);
+  }, []);
   if (!mounted) return null;
 
   const options = [
@@ -18,7 +21,7 @@ export function ThemeToggle() {
   ];
 
   return (
-    <div className="flex items-center rounded-xl border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900/50 w-fit">
+    <div className="flex items-center rounded-xl border border-zinc-300 dark:border-zinc-800 bg-brand-bg dark:bg-zinc-900/50 w-fit">
       {options.map((opt) => (
         <button
           key={opt.value}
