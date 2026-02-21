@@ -8,7 +8,7 @@ type solveDataProps = {
 
 export const SolveData = ({ name = "" }: solveDataProps) => {
   return (
-    <section className="bg-white dark:bg-brand-bg rounded-3xl p-8 shadow-sm border border-zinc-300 dark:border-zinc-800 space-y-6">
+    <section className="bg-white dark:bg-brand-bg rounded-3xl p-3 md:p-8 shadow-sm border border-zinc-300 dark:border-zinc-800 space-y-6">
       {/* Inputs Row */}
       <InputRows name={name} />
 

@@ -82,7 +82,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            className="absolute top-16 left-0 right-0 bg-brand-bg/95 backdrop-blur-2xl border border-white/20 dark:border-zinc-800 rounded-3xl p-4 shadow-3xl md:hidden flex flex-col gap-2"
+            className="absolute w-[95%] top-18 left-1/2 -translate-x-1/2 right-0 bg-brand-bg/95 backdrop-blur-2xl border border-white/20 dark:border-zinc-800 rounded-3xl p-4 shadow-3xl md:hidden flex flex-col gap-2"
           >
             {links.map((link) => (
               <Link
