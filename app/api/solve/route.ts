@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const base64Data = Buffer.from(arrayBuffer).toString("base64");
 
-    const genAI = new GoogleGenerativeAI(String(userKey));
+    const genAI = new GoogleGenerativeAI(String(FINAL_KEY));
     const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
     const prompt = `
