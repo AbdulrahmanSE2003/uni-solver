@@ -2,11 +2,8 @@ import { Sparkles } from "lucide-react";
 
 function Mockup() {
   return (
-    <section className="p-5 py-20 max-w-5xl mx-auto">
+    <section className="px-0 md:p-5 py-20 max-w-5xl mx-auto">
       <div className="group relative bg-brand-bg backdrop-blur-sm rounded-[2.5rem] w-full shadow-2xl shadow-brand-blue/15 p-8 border border-white dark:border-zinc-800">
-        {/* Decorative Light effect */}
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-blue/10 blur-[100px] rounded-full -z-10"></div>
-
         <div className="code-analysis space-y-6">
           <div className="code-header flex gap-6 items-center">
             {/* Windows Circles */}
@@ -45,7 +42,7 @@ function Mockup() {
             </div>
 
             {/* AI Analysis Zone - More Interactive */}
-            <div className="relative overflow-hidden border-2 border-dashed border-brand-blue/20 rounded-4xl p-16 w-full flex flex-col justify-center items-center bg-linear-to-b from-brand-blue/5 to-transparent">
+            <div className="relative overflow-hidden border-2 border-dashed border-brand-blue/20 rounded-4xl p-16 w-full flex flex-col justify-center items-center bg-linear-to-b from-brand-blue/5 to-transparent text-center">
               <div className="relative flex flex-col items-center gap-3">
                 <div className="p-3 bg-brand-blue rounded-2xl shadow-lg shadow-brand-blue/40">
                   <Sparkles className="w-6 h-6 text-white animate-spin-slow" />

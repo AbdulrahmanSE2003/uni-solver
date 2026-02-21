@@ -17,7 +17,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false); // حالة القائمة في الموبايل
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl">
+    <header className="w-[95%] mx-auto mt-2">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -28,13 +28,13 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
           <div className="bg-brand-blue rounded-full p-2 shadow-blue-500/20 shadow-lg">
             <Sparkles className="text-white w-4 h-4 md:w-5 md:h-5" />
           </div>
-          <span className="font-bold text-sm md:text-base tracking-tighter hidden sm:block">
+          <span className="font-bold text-sm md:text-base hidden sm:block tracking-tighter">
             UniSolver
           </span>
         </Link>
 
         {/* Desktop Links (Hidden on Mobile) */}
-        <ul className="hidden md:flex items-center gap-1 bg-zinc-100/50 dark:bg-zinc-900/50 p-1 rounded-full border border-zinc-200/50 dark:border-zinc-800">
+        <ul className="hidden md:flex items-center gap-1 bg-zinc-100/50 dark:bg-zinc-900/50 p-0.5 px-0 rounded-full border border-zinc-200/50 dark:border-zinc-800">
           {links.map((link) => {
             const isActive = pathname === link.to;
             return (

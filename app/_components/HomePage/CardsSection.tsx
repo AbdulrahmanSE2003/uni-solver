@@ -23,12 +23,12 @@ const cards = [
 
 function CardsSection() {
   return (
-    <section className="p-14 py-20 mx-auto flex flex-col justify-center items-center gap-4">
-      <h3 className="capitalize font-bold text-5xl text-center">
+    <section className="px-5 md:p-14 py-20 mx-auto flex flex-col justify-center items-center gap-4">
+      <h3 className="capitalize font-bold text-3xl md:text-5xl text-center">
         Engineered for excellence
       </h3>
 
-      <p className="text-gray-500 ">
+      <p className="text-gray-500 text-center">
         Powerful features designed specifically for modern academic needs.
       </p>
 

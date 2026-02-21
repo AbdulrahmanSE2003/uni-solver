@@ -14,7 +14,7 @@ const Hero = () => {
 
       {/* Intro */}
 
-      <h1 className="font-black text-5xl md:text-7xl capitalize leading-snug text-center text-brand-blue">
+      <h1 className="font-black text-4xl md:text-7xl capitalize leading-snug text-center text-brand-blue">
         <span className="text-brand-text">Ace Your Assignments </span> <br />
         <span className="bg-linear-to-r from-brand-blue to-brand-blue/20 bg-clip-text text-transparent">
           with Human-AI
@@ -22,7 +22,7 @@ const Hero = () => {
       </h1>
 
       {/* Text */}
-      <p className="w-3/5 text-center font-medium text-zinc-600">
+      <p className=" w-full md:w-3/5 text-center font-medium text-zinc-600">
         The ultimate companion for students. Generate, edit, and export academic
         work with human-like precision. Stay ahead of the curve with UniSolver.
       </p>
