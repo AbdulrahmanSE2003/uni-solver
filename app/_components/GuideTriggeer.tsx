@@ -8,7 +8,7 @@ const GuideTriggeer = () => {
   return (
     <>
       <div
-        className={`bg-amber-200/40 dark:bg-amber-500/10 w-full rounded-xl border border-amber-200 dark:border-amber-500/20 p-6 `}
+        className={`bg-amber-200/40 dark:bg-amber-300/10 w-full rounded-xl border border-amber-200 dark:border-amber-500/20 p-6 `}
       >
         <h2 className="text-lg font-medium text-amber-600 dark:text-amber-400/90 mb-1">
           How to Get Your Key?
