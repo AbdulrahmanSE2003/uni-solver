@@ -7,7 +7,7 @@ import SolveCtxProvider from "@/app/_context/SolveCTX";
 import Navbar from "@/app/_components/Navbar";
 import Footer from "./_components/Footer";
 import AuthSection from "./_components/AuthSection";
-import { ThemeProvider } from "./_components/ThemeProvider";
+import { ThemeProvider } from "./_components/HomePage/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
