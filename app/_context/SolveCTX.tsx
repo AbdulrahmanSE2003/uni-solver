@@ -50,10 +50,12 @@ const SolveCtxProvider = ({ children }: ContextProps) => {
       });
       const data = await res.json();
 
+      console.log(data.error);
+
       if (data.solution) {
         setSolution(data.solution);
       } else {
-        alert(data.error || "Something went wrong!");
+        toast.error(data.error || "Failed to solve, Try again later!");
       }
     } catch (error) {
       console.error("Upload error:", error);

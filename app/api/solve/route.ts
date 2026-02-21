@@ -66,8 +66,12 @@ Please analyze the attached PDF and solve it.
     return NextResponse.json({ solution: text });
   } catch (error) {
     console.error("❌ Gemini Error:", error);
-    toast.error(
-      "The AI engine is currently experiencing high traffic. Please wait a moment and try again.",
+    return NextResponse.json(
+      {
+        error:
+          "The AI engine is currently experiencing high traffic. Please wait a moment and try again.",
+      },
+      { status: 401 },
     );
   }
 }

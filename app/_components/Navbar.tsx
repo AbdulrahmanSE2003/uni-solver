@@ -21,7 +21,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="relative bg-brand-bg/80 backdrop-blur-xl border border-white/20 dark:border-zinc-800 shadow-2xl rounded-full p-2 px-4 md:px-6 flex justify-between items-center gap-2 "
+        className="relative bg-brand-bg/80 w-fit md:min-w-1/2 mx-auto backdrop-blur-xl border border-white/20 dark:border-zinc-800 shadow-2xl rounded-full p-2 px-4 md:px-6 flex justify-between items-center gap-4 "
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
