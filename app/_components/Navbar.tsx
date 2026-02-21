@@ -25,7 +25,7 @@ const Navbar = ({ children }: navbarProps) => {
       initial={{ y: -100, x: "-50%", opacity: 0 }}
       animate={{ y: 0, x: "-50%", opacity: 1 }}
       transition={{ duration: 0.4, ease: "circOut" }}
-      className="fixed top-6 left-1/2 h-14 min-w-[400px] bg-white/70 backdrop-blur-md border border-white/20 shadow-2xl shadow-brand-blue/10 text-brand-text rounded-full p-2 px-6 flex justify-between items-center gap-8 z-50"
+      className="fixed top-6 left-1/2 h-14 min-w-100 bg-brand-bg backdrop-blur-md border border-white dark:border-zinc-700 shadow-2xl shadow-brand-blue/10 text-brand-text rounded-full p-2 px-6 flex justify-between items-center gap-8 z-50"
     >
       {/* Logo */}
       <div className="flex justify-center items-center gap-2">
