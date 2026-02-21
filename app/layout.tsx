@@ -58,7 +58,7 @@ export default function RootLayout({
               <AuthSection />
             </Navbar>
             <Toaster richColors />
-            <main className="min-h-screen pt-32 md:py-24 text-brand-text px-0 max-sm:p-5">
+            <main className="min-h-screen pt-32 md:py-8 text-brand-text px-0 max-sm:p-5">
               {children}
             </main>
             <Footer />

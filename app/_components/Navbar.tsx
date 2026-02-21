@@ -17,7 +17,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false); // حالة القائمة في الموبايل
 
   return (
-    <header className="w-[95%] mx-auto mt-2">
+    <header className="w-[95%] mx-auto mt-2 sticky top-4 z-50">
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}

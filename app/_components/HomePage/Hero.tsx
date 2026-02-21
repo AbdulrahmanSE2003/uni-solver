@@ -7,7 +7,7 @@ const Hero = () => {
       {/* Proof */}
       <div className="bg-brand-blue/10 rounded-full py-2 px-5 border border-brand-blue/50 flex justify-center items-center gap-2">
         <BadgeCheckIcon className={`fill-brand-blue stroke-brand-bg`} />
-        <span className="uppercase text-sm text-brand-blue font-bold">
+        <span className="uppercase text-xs md:text-sm text-brand-blue font-bold">
           your trusted AI in your career{" "}
         </span>
       </div>
