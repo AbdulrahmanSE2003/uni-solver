@@ -10,6 +10,7 @@ const InputRows = ({ name }: InputRowsProps) => {
   const { student, setStudent, id, setId } = useSolve();
   useEffect(() => {
     setStudent(name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

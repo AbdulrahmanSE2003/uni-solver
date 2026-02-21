@@ -1,6 +1,7 @@
 "use client";
 
 import { LogOut, Key, Hash, Save } from "lucide-react";
+import Input from "../_components/Input";
 
 export default function SettingsPage() {
   return (
@@ -22,35 +23,21 @@ export default function SettingsPage() {
 
           <div className="space-y-4">
             {/* API Key Field */}
-            <div className="space-y-2">
+            <div className="space-y-4">
               <label className="text-sm font-medium text-gray-700 dark:text-zinc-300">
                 Gemini API Key
               </label>
-              <input
-                type="password"
-                placeholder="Enter your API key"
-                className="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-blue/50 transition-all text-sm"
-              />
+              <Input placeholder="Enter your API key..." />
             </div>
-
-            {/* ID Field */}
+            {/* ID Field
             <div className="space-y-2">
               <label className="text-sm font-medium text-gray-700 dark:text-zinc-300">
                 Project ID
               </label>
               <div className="relative">
-                <input
-                  type="text"
-                  placeholder="uni-solver-123"
-                  className="w-full pl-9 pr-3 py-2 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-blue/50 transition-all text-sm"
-                />
-                <Hash
-                  className="absolute left-3 top-2.5 text-gray-400"
-                  size={14}
-                />
+                <Input placeholder="Enter your ID..." />
               </div>
-            </div>
-
+            </div> */}
             <button className="mt-2 flex items-center justify-center gap-2 w-full sm:w-fit px-4 py-2 bg-brand-blue hover:bg-blue-600 text-white rounded-md text-sm font-medium transition-colors">
               <Save size={16} /> Save Changes
             </button>
