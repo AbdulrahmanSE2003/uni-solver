@@ -31,6 +31,8 @@ export default async function AuthSection() {
         src={session.user?.image || ""}
         alt="Profile"
         className="w-8 h-8 rounded-full border border-brand-blue"
+        width={28}
+        height={28}
       />
     </div>
   );
