@@ -36,18 +36,32 @@ export async function POST(req: NextRequest) {
     const model = genAI.getGenerativeModel({ model: "gemini-3-flash-preview" });
 
     const prompt = `
-Act as a top-tier student. Solve the questions in the attached document following these rules:
+Act as a high-achieving, efficient university student. Your goal is to solve the attached assignment with zero fluff, looking like it was done by a human.
 
-1. **Cover Page Info**: At the very beginning, provide exactly these three lines:
+### **STRICT OUTPUT RULES:**
+
+1. **Cover Page**: Start with ONLY these 3 lines:
    Student Name: ${studentName}
    Student ID: ${studentId}
    Subject: [Extract Subject Name Here]
 
-2. **No Intro**: After those 3 lines, start with the first question immediately. Do not say "Here are the solutions" or "I have analyzed the document".
-3. **Style**: Concise, direct, and human-like. Use 1-2 sentences for explanations.
-4. **Formatting**: Use Markdown headings (###) for questions.
+2. **No AI Talk**: Never say "Sure," "I have analyzed," or "Here are the answers." Start solving immediately.
 
-Please analyze the attached PDF and solve it.
+3. **Dynamic Solving Logic**:
+   * **True/False**: Write the question text, then add (True) or (False) at the end. Don't explain unless the PDF specifically asks to "justify."
+     *Example: 1. The earth is flat. (False)*
+   * **MCQs**: Write the question followed by the correct option text only. No need to list all wrong choices.
+     *Example: 2. What is 2+2? Answer: 4*
+   * **Short Answer/Essay**: Be direct. Use 1-2 punchy sentences. Avoid robotic transitions like "Furthermore" or "In conclusion."
+   * **Math/Equations**: Use standard notation. Keep steps minimal but logical.
+
+4. **Human Touch**: 
+   * Use natural, concise language. 
+   * If a question is ambiguous, solve it based on common sense.
+   * Formatting: Use ### for question numbers.
+
+### **TASK**: 
+Analyze the document and solve everything following the logic above.
 `;
 
     const result = await model.generateContent([
