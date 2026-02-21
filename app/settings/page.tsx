@@ -1,51 +1,77 @@
-import React from "react";
-import { Settings, Construction, ArrowLeft } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-const SettingsPage = () => {
+import { LogOut, Key, Hash, Save } from "lucide-react";
+
+export default function SettingsPage() {
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <div className="max-w-md w-full text-center space-y-8 bg-white p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100">
-        {/* Icon Container */}
-        <div className="relative inline-block">
-          <div className="bg-blue-50 p-6 rounded-2xl">
-            <Settings className="w-16 h-16 text-blue-600 rotate-30" />
-          </div>
-          <div className="absolute -bottom-2 -right-2 bg-amber-100 p-2 rounded-lg border-2 border-white">
-            <Construction className="w-6 h-6 text-amber-600" />
-          </div>
-        </div>
-
-        {/* Text Content */}
-        <div className="space-y-3">
-          <h1 className="text-3xl font-bold text-slate-900">Settings</h1>
-          <p className="text-slate-500 text-lg font-medium">Coming Soon!</p>
-          <p className="text-slate-400 text-sm leading-relaxed">
-            We're currently working on that feature. Stay tuned!
-          </p>
-        </div>
-
-        {/* Progress Bar (Visual Only) */}
-        <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-          <div className="bg-blue-600 h-full w-2/3 rounded-full animate-pulse" />
-        </div>
-
-        {/* Back Button */}
-        <div className="pt-4">
-          <Link
-            href="/solve"
-            className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors group"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Solver
-          </Link>
-        </div>
+    <div className="max-w-2xl mx-auto space-y-8">
+      {/* Header */}
+      <div>
+        <h1 className="text-2xl font-bold text-brand-text">Settings</h1>
+        <p className="text-sm text-gray-500 dark:text-zinc-400">
+          Manage your API configurations and account.
+        </p>
       </div>
 
-      {/* Footer Branding */}
-      <p className="mt-8 text-slate-400 text-sm font-medium">Uni-Solver v2.0</p>
+      <div className="grid gap-6">
+        {/* API Configuration Card */}
+        <div className="rounded-xl border border-gray-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 shadow-sm">
+          <h2 className="text-lg font-medium mb-4 flex items-center gap-2">
+            <Key size={18} className="text-brand-blue" /> API Configuration
+          </h2>
+
+          <div className="space-y-4">
+            {/* API Key Field */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-zinc-300">
+                Gemini API Key
+              </label>
+              <input
+                type="password"
+                placeholder="Enter your API key"
+                className="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-blue/50 transition-all text-sm"
+              />
+            </div>
+
+            {/* ID Field */}
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-gray-700 dark:text-zinc-300">
+                Project ID
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="uni-solver-123"
+                  className="w-full pl-9 pr-3 py-2 rounded-md border border-gray-200 dark:border-zinc-800 bg-gray-50 dark:bg-zinc-900 text-brand-text focus:outline-none focus:ring-2 focus:ring-brand-blue/50 transition-all text-sm"
+                />
+                <Hash
+                  className="absolute left-3 top-2.5 text-gray-400"
+                  size={14}
+                />
+              </div>
+            </div>
+
+            <button className="mt-2 flex items-center justify-center gap-2 w-full sm:w-fit px-4 py-2 bg-brand-blue hover:bg-blue-600 text-white rounded-md text-sm font-medium transition-colors">
+              <Save size={16} /> Save Changes
+            </button>
+          </div>
+        </div>
+
+        {/* Danger Zone */}
+        <div className="rounded-xl border border-red-200 dark:border-red-900/30 bg-red-50/50 dark:bg-red-950/10 p-6">
+          <h2 className="text-lg font-medium text-red-600 dark:text-red-400 mb-1">
+            Danger Zone
+          </h2>
+          <p className="text-sm text-red-500/80 mb-4">
+            Once you log out, you will need to sign in again to access your
+            projects.
+          </p>
+
+          <button className="flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md text-sm font-medium transition-colors shadow-sm shadow-red-500/20">
+            <LogOut size={16} /> Logout from UniSolver
+          </button>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default SettingsPage;
+}

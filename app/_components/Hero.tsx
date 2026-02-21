@@ -3,7 +3,7 @@ import DynamicButton from "./DynamicButton";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col justify-start items-center p-5  space-y-8 max-w-5xl mx-auto">
+    <section className="flex flex-col bg-brand-bg justify-start items-center p-5  space-y-8 max-w-5xl mx-auto">
       {/* Proof */}
       <div className="bg-brand-blue/10 rounded-full py-2 px-5 border border-brand-blue/50 flex justify-center items-center gap-2">
         <BadgeCheckIcon fill="#155dfc" stroke="#efefef" />
