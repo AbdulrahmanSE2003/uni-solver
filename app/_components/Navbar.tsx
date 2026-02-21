@@ -21,7 +21,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="relative bg-brand-bg/80 backdrop-blur-xl border border-white/20 dark:border-zinc-800 shadow-2xl rounded-full p-2 px-4 md:px-6 flex justify-between items-center gap-2"
+        className="relative bg-brand-bg/80 backdrop-blur-xl border border-white/20 dark:border-zinc-800 shadow-2xl rounded-full p-2 px-4 md:px-6 flex justify-between items-center gap-2 "
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
@@ -82,7 +82,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
             initial={{ opacity: 0, scale: 0.95, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            className="absolute w-[95%] top-18 left-1/2 -translate-x-1/2 right-0 bg-brand-bg/95 backdrop-blur-2xl border border-white/20 dark:border-zinc-800 rounded-3xl p-4 shadow-3xl md:hidden flex flex-col gap-2"
+            className="absolute w-[95%] top-18 left-1/2 -translate-x-1/2 right-0 bg-brand-bg/95 backdrop-blur-2xl border border-white/20 dark:border-zinc-800 rounded-3xl p-4 shadow-3xl md:hidden flex flex-col gap-2 z-50"
           >
             {links.map((link) => (
               <Link

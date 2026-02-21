@@ -1,6 +1,6 @@
 "use client";
 
-import { EyeIcon, Key, Save } from "lucide-react";
+import { EyeIcon, EyeOff, Key, Save } from "lucide-react";
 import Input from "../Input";
 import { useSolve } from "@/app/_context/SolveCTX";
 import { useEffect, useState } from "react";
@@ -48,10 +48,17 @@ const ApiKey = () => {
             value={apiInput}
             onChange={(e) => setApiInput(e.target.value)}
           />
-          <EyeIcon
-            onClick={() => setShowKey((prev) => !prev)}
-            className={`absolute right-2 bottom-6 size-5 cursor-pointer`}
-          />
+          {showKey ? (
+            <EyeIcon
+              onClick={() => setShowKey((prev) => !prev)}
+              className={`absolute right-1.5 bottom-5 size-7 cursor-pointer z-10 p-1 bg-zinc-900`}
+            />
+          ) : (
+            <EyeOff
+              onClick={() => setShowKey((prev) => !prev)}
+              className={`absolute right-1.5 bottom-5 size-7 cursor-pointer z-10 p-1 bg-zinc-900`}
+            />
+          )}
         </div>
         <button
           onClick={() => handleApiKey(apiInput)}
