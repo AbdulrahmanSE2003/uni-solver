@@ -3,7 +3,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import AuthSection from "./AuthSection";
 import { ReactNode } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
