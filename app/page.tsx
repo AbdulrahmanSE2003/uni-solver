@@ -1,6 +1,7 @@
 import CardsSection from "./_components/HomePage/CardsSection";
 import Hero from "./_components/HomePage/Hero";
 import Mockup from "./_components/HomePage/Mockup";
+import SetupGuide from "./_components/HomePage/SetupGuide";
 import StartSection from "./_components/HomePage/StartSection";
 
 export default async function UniSolved() {
@@ -11,6 +12,9 @@ export default async function UniSolved() {
 
       {/* Mockup Section */}
       <Mockup />
+
+      {/* How it works */}
+      <SetupGuide />
 
       {/* Cards Section */}
       <CardsSection />

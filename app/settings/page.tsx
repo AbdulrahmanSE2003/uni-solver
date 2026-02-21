@@ -1,3 +1,4 @@
+import GuideTriggeer from "../_components/GuideTriggeer";
 import ApiKey from "../_components/settings/ApiKey";
 import Logout from "../_components/settings/Logout";
 
@@ -15,6 +16,9 @@ export default function SettingsPage() {
       <div className="grid gap-6">
         {/* API Configuration Card */}
         <ApiKey />
+
+        {/* Modal Guide */}
+        <GuideTriggeer />
 
         {/* Danger Zone */}
         <Logout />

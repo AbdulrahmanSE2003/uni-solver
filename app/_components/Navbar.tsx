@@ -25,7 +25,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
       >
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="bg-brand-blue rounded-full p-2 shadow-blue-500/20 shadow-lg">
+          <div className="bg-brand-blue rounded-xl p-2 shadow-blue-500/20 shadow-lg">
             <Sparkles className="text-white w-4 h-4 md:w-5 md:h-5" />
           </div>
           <span className="font-bold text-sm md:text-base hidden sm:block tracking-tighter">
@@ -34,7 +34,7 @@ const Navbar = ({ children }: { children?: ReactNode }) => {
         </Link>
 
         {/* Desktop Links (Hidden on Mobile) */}
-        <ul className="hidden md:flex items-center gap-1 bg-zinc-100/50 dark:bg-zinc-900/50 p-0.5 px-0 rounded-full border border-zinc-200/50 dark:border-zinc-800">
+        <ul className="hidden md:flex items-center gap-1 bg-zinc-100/50 dark:bg-zinc-900/50 p-0.5 px-0 rounded-full border border-zinc-200/50 dark:border-zinc-800 overflow-hidden">
           {links.map((link) => {
             const isActive = pathname === link.to;
             return (

@@ -51,12 +51,12 @@ const ApiKey = () => {
           {showKey ? (
             <EyeIcon
               onClick={() => setShowKey((prev) => !prev)}
-              className={`absolute right-1.5 bottom-5 size-7 cursor-pointer z-10 p-1 bg-zinc-900`}
+              className={`absolute right-1.5 bottom-5 size-7 cursor-pointer z-10 p-1 dark:bg-zinc-900`}
             />
           ) : (
             <EyeOff
               onClick={() => setShowKey((prev) => !prev)}
-              className={`absolute right-1.5 bottom-5 size-7 cursor-pointer z-10 p-1 bg-zinc-900`}
+              className={`absolute right-1.5 bottom-5 size-7 cursor-pointer z-10 p-1 dark:bg-zinc-900`}
             />
           )}
         </div>

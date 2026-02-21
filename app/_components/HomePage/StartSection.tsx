@@ -2,7 +2,7 @@ import DynamicButton from "../DynamicButton";
 
 export default function StartSection() {
   return (
-    <section className="bg-brand-blue-2 dark:bg-zinc-950 dark:border dark:border-zinc-800 rounded-[40px] mx-0 md:mx-12 px-5 py-8 md:p-8  flex flex-col justify-center items-center space-y-4">
+    <section className="bg-brand-blue-2 dark:bg-zinc-950 dark:border dark:border-zinc-800 rounded-[40px] mx-0 md:mx-12 px-5 py-8 md:p-8  flex flex-col justify-center items-center space-y-4 ">
       <h2 className="text-2xl md:text-5xl text-center font-black text-white relative z-10 leading-tight">
         Ready to Transform Your <br /> Academic Experience?
       </h2>
