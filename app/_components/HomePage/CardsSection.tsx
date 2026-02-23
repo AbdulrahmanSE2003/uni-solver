@@ -28,11 +28,12 @@ const CardsSection = () => {
     <section className="py-20 px-6 max-w-6xl mx-auto">
       <div className="text-center mb-16">
         <h2 className="text-3xl md:text-4xl font-black text-brand-text mb-4">
-          How to Setup Your <span className="text-brand-blue">API Key</span>
+          Why Choose <span className="text-brand-blue">UniSolver?</span>
         </h2>
         <p className="text-slate-500 dark:text-zinc-400 max-w-2xl mx-auto">
-          Follow these simple steps to power up UniSolver with your own Gemini
-          engine. It&apos;s free, secure, and takes less than a minute.
+          We provide the ultimate tools for students to streamline their
+          academic workflow with privacy, professional formatting, and natural
+          AI writing.
         </p>
       </div>
 
