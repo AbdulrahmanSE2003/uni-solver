@@ -13,8 +13,7 @@ UniSolver is a modern, high-performance web application built with **Next.js 15*
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/) (App Router)
-- **Library:** [React 19](https://react.dev/)
+- **Framework:** [Next.js 16](https://nextjs.org/) (App Router)
 - **Styling:** Tailwind CSS v4, shadcn/ui
 - **Animations:** Framer Motion
 - **AI Integration:** `@google/generative-ai` (Gemini SDK)
