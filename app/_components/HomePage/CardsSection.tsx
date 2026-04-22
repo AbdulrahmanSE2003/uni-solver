@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const cards = [
   {
     icon: <Edit stroke="#155dff" />,
-    heading: "AI Human-like Writing",
+    heading: "AI-powered study assistant",
     paragraph:
       "Our advanced engine generates natural phrasing that bypasses basic detection while maintaining your unique academic voice.",
   },
